@@ -247,6 +247,133 @@ body{
   }
 }
 
+
+/* v20: окончательная адаптивность */
+
+/* Базово страница занимает весь экран */
+html, body{
+  width:100%;
+  min-height:100%;
+  margin:0;
+  padding:0;
+}
+body{
+  min-height:100svh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  overflow-x:hidden;
+  background:#f8f4ea;
+}
+
+/* На телефоне и планшете игра всегда на всю ширину */
+.app{
+  width:100% !important;
+  max-width:720px !important;
+  min-height:100svh !important;
+  margin:0 auto !important;
+  box-shadow:none !important;
+}
+
+/* Старт заполняет весь видимый экран.
+   Фон — часть самого экрана, а не отдельная картинка сверху. */
+#start{
+  width:100% !important;
+  min-height:100svh !important;
+  height:100svh !important;
+  aspect-ratio:auto !important;
+  position:relative !important;
+  overflow:hidden !important;
+  padding:0 !important;
+  background:#f8f4ea !important;
+}
+
+#start .start-bg-img{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  display:block !important;
+  z-index:0 !important;
+}
+
+/* Все декоративные элементы действительно поверх фона */
+#start .start-bouquet-wrap{
+  position:absolute !important;
+  left:50% !important;
+  top:48% !important;
+  width:min(58%, 300px) !important;
+  max-width:none !important;
+  transform:translateX(-50%) !important;
+  z-index:4 !important;
+}
+
+#start .start-btn{
+  position:absolute !important;
+  left:50% !important;
+  top:76% !important;
+  bottom:auto !important;
+  transform:translateX(-50%) !important;
+  z-index:5 !important;
+  width:min(72%, 340px) !important;
+}
+
+#start .start-leaf{
+  z-index:3 !important;
+}
+
+/* Экран заданий — картинки всегда показываем целиком */
+.game-screen .choice{
+  overflow:hidden !important;
+}
+.game-screen .choice img{
+  display:block !important;
+  width:100% !important;
+  height:clamp(150px, 26vh, 240px) !important;
+  object-fit:contain !important;
+  object-position:center !important;
+}
+
+/* На широком компьютере не растягиваем карточки на весь монитор */
+@media (min-width: 721px){
+  body{
+    padding:20px 0;
+  }
+  .app{
+    width:min(720px, 92vw) !important;
+    max-width:720px !important;
+    min-height:0 !important;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 10px 35px #0002 !important;
+  }
+  #start{
+    height:min(92svh, 980px) !important;
+    min-height:min(92svh, 980px) !important;
+  }
+  .game-screen .choice img{
+    height:220px !important;
+  }
+}
+
+/* На очень узких телефонах немного уменьшаем букет/кнопку,
+   но экран всё равно остаётся на всю высоту. */
+@media (max-width: 430px){
+  #start .start-bouquet-wrap{
+    top:49% !important;
+    width:56% !important;
+  }
+  #start .start-btn{
+    top:76.5% !important;
+    width:74% !important;
+  }
+  .game-screen .choice img{
+    height:clamp(135px, 23vh, 190px) !important;
+  }
+}
+
 </style>
 
 <style id="start-placement-fix">
